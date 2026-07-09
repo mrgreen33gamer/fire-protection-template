@@ -1,7 +1,5 @@
-// _archetype-library/hero-f-blueprint/Component.tsx
-//
-// Hero F: Blueprint Schematic — self-drawing SVG line-art (house wireframe /
-// abstract floor-plan). Stroke-dashoffset draw-in on mount.
+// Fire Protection Hero — Sprinkler Riser + Head Layout Schematic
+// Trade-specific blueprint (not generic house). Draw-in + setTimeout safety.
 'use client';
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
@@ -9,28 +7,33 @@ import Link from 'next/link';
 import { PhoneIcon, ChevronIcon, CheckIcon } from './_shared/icons';
 import styles from './styles.module.scss';
 
-/** Path lengths are estimated; we measure real lengths on mount for accuracy. */
 function BlueprintSchematic({ label }: { label: string }) {
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     const svg = svgRef.current;
     if (!svg) return;
-    // data-draw marks stroke geometry; filled nodes are excluded
     const paths = Array.from(svg.querySelectorAll<SVGGeometryElement>('[data-draw]'));
 
     paths.forEach((el, i) => {
       const length = typeof el.getTotalLength === 'function' ? el.getTotalLength() : 400;
       el.style.strokeDasharray = `${length}`;
       el.style.strokeDashoffset = `${length}`;
-      el.style.animation = `blueprintDraw 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards`;
-      el.style.animationDelay = `${0.35 + i * 0.07}s`;
+      el.style.animation = `blueprintDraw 1.55s cubic-bezier(0.4, 0, 0.2, 1) forwards`;
+      el.style.animationDelay = `${0.28 + i * 0.055}s`;
+      // Safety: force lines visible even if keyframes fail in CSS modules
+      window.setTimeout(() => {
+        el.style.strokeDashoffset = '0';
+      }, 2200 + i * 40);
     });
   }, []);
 
   return (
     <div className={styles.schematicWrap} role="img" aria-label={label}>
       <div className={styles.schematicGrid} aria-hidden="true" />
+      <div className={styles.rBadge} aria-hidden="true">
+        NFPA LAYOUT
+      </div>
       <svg
         ref={svgRef}
         className={styles.schematic}
@@ -39,158 +42,121 @@ function BlueprintSchematic({ label }: { label: string }) {
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        {/* Outer plot boundary */}
-        <rect data-draw x="24" y="48" width="312" height="240" rx="2" className={styles.traceDim} />
+        {/* Floor plate boundary */}
+        <rect data-draw x="28" y="36" width="304" height="250" rx="2" className={styles.traceDim} />
 
-        {/* Main structure footprint */}
-        <path
-          data-draw
-          d="M56 200 L56 120 L120 72 L184 120 L184 200 Z"
-          className={styles.traceMain}
-        />
-        {/* Roof ridge detail */}
-        <line data-draw x1="120" y1="72" x2="120" y2="200" className={styles.traceDim} />
+        {/* Main riser column (left) */}
+        <rect data-draw x="44" y="56" width="28" height="210" className={styles.traceMain} />
+        <line data-draw x1="44" y1="90" x2="72" y2="90" className={styles.traceAccent} />
+        <line data-draw x1="44" y1="130" x2="72" y2="130" className={styles.traceAccent} />
+        <line data-draw x1="44" y1="170" x2="72" y2="170" className={styles.traceDim} />
+        <line data-draw x1="44" y1="210" x2="72" y2="210" className={styles.traceDim} />
 
-        {/* Attached wing / garage volume */}
-        <path
-          data-draw
-          d="M184 200 L184 140 L280 140 L280 200 Z"
-          className={styles.traceMain}
-        />
-        {/* Wing roof slope */}
-        <path data-draw d="M184 140 L232 108 L280 140" className={styles.traceAccent} />
+        {/* OS&Y / control valve callout on riser */}
+        <circle data-draw cx="58" cy="110" r="10" className={styles.traceAccent} />
+        <line data-draw x1="58" y1="100" x2="58" y2="120" className={styles.traceAccent} />
+        <line data-draw x1="48" y1="110" x2="68" y2="110" className={styles.traceAccent} />
 
-        {/* Interior partition lines */}
-        <line data-draw x1="56" y1="160" x2="184" y2="160" className={styles.traceDim} />
-        <line data-draw x1="120" y1="160" x2="120" y2="200" className={styles.traceDim} />
-        <line data-draw x1="232" y1="140" x2="232" y2="200" className={styles.traceDim} />
+        {/* Horizontal feed main from riser */}
+        <line data-draw x1="72" y1="110" x2="310" y2="110" className={styles.traceMain} />
 
-        {/* Door openings */}
-        <path data-draw d="M100 200 L100 182 Q110 170 120 182 L120 200" className={styles.traceAccent} />
-        <line data-draw x1="248" y1="200" x2="264" y2="200" className={styles.traceAccent} />
+        {/* Branch lines (grid) */}
+        <line data-draw x1="110" y1="110" x2="110" y2="250" className={styles.traceMain} />
+        <line data-draw x1="160" y1="110" x2="160" y2="250" className={styles.traceMain} />
+        <line data-draw x1="210" y1="110" x2="210" y2="250" className={styles.traceMain} />
+        <line data-draw x1="260" y1="110" x2="260" y2="250" className={styles.traceMain} />
+        <line data-draw x1="310" y1="110" x2="310" y2="200" className={styles.traceDim} />
 
-        {/* Window marks */}
-        <rect data-draw x="72" y="128" width="28" height="20" className={styles.traceDim} />
-        <rect data-draw x="140" y="128" width="28" height="20" className={styles.traceDim} />
-        <rect data-draw x="244" y="156" width="24" height="18" className={styles.traceDim} />
+        {/* Cross mains */}
+        <line data-draw x1="110" y1="160" x2="310" y2="160" className={styles.traceDim} />
+        <line data-draw x1="110" y1="210" x2="260" y2="210" className={styles.traceDim} />
+        <line data-draw x1="110" y1="250" x2="260" y2="250" className={styles.traceDim} />
 
-        {/* Circuit-ish utility runs */}
-        <polyline
-          data-draw
-          points="56,200 40,200 40,248 200,248 200,200"
-          className={styles.traceAccent}
-        />
-        <polyline
-          data-draw
-          points="280,170 300,170 300,248 200,248"
-          className={styles.traceDim}
-        />
+        {/* Sprinkler head deflector marks (T-junction + head) */}
+        <path data-draw d="M110 135 L110 128 M104 128 L116 128" className={styles.traceAccent} />
+        <path data-draw d="M160 135 L160 128 M154 128 L166 128" className={styles.traceAccent} />
+        <path data-draw d="M210 135 L210 128 M204 128 L216 128" className={styles.traceAccent} />
+        <path data-draw d="M260 135 L260 128 M254 128 L266 128" className={styles.traceAccent} />
 
-        {/* Junction nodes (no draw animation) */}
-        <circle cx="40" cy="200" r="3.5" className={styles.node} />
-        <circle cx="200" cy="248" r="3.5" className={styles.node} />
-        <circle cx="300" cy="170" r="3.5" className={styles.node} />
-        <circle cx="120" cy="72" r="4" className={styles.nodeAccent} />
-        <circle cx="232" cy="108" r="3.5" className={styles.nodeAccent} />
+        <path data-draw d="M110 185 L110 178 M104 178 L116 178" className={styles.traceAccent} />
+        <path data-draw d="M160 185 L160 178 M154 178 L166 178" className={styles.traceAccent} />
+        <path data-draw d="M210 185 L210 178 M204 178 L216 178" className={styles.traceAccent} />
+        <path data-draw d="M260 185 L260 178 M254 178 L266 178" className={styles.traceAccent} />
 
-        {/* Dimension tick marks */}
-        <line data-draw x1="56" y1="216" x2="184" y2="216" className={styles.traceDim} />
-        <line data-draw x1="56" y1="212" x2="56" y2="220" className={styles.traceDim} />
-        <line data-draw x1="184" y1="212" x2="184" y2="220" className={styles.traceDim} />
-        <line data-draw x1="296" y1="48" x2="336" y2="48" className={styles.traceDim} />
-        <line data-draw x1="336" y1="48" x2="336" y2="288" className={styles.traceDim} />
+        <path data-draw d="M110 235 L110 228 M104 228 L116 228" className={styles.traceAccent} />
+        <path data-draw d="M160 235 L160 228 M154 228 L166 228" className={styles.traceAccent} />
+        <path data-draw d="M210 235 L210 228 M204 228 L216 228" className={styles.traceAccent} />
+        <path data-draw d="M260 235 L260 228 M254 228 L266 228" className={styles.traceAccent} />
 
-        {/* Compass rose (abstract) */}
-        <circle data-draw cx="308" cy="72" r="14" className={styles.traceDim} />
-        <line data-draw x1="308" y1="58" x2="308" y2="86" className={styles.traceAccent} />
-        <line data-draw x1="294" y1="72" x2="322" y2="72" className={styles.traceDim} />
+        {/* Spray radius arcs on select heads */}
+        <path data-draw d="M96 128 Q110 112 124 128" className={styles.traceDim} />
+        <path data-draw d="M196 178 Q210 162 224 178" className={styles.traceDim} />
+        <path data-draw d="M146 228 Q160 212 174 228" className={styles.traceDim} />
+
+        {/* Fire department connection (FDC) stub */}
+        <path data-draw d="M58 266 L58 280 L88 280" className={styles.traceAccent} />
+        <rect data-draw x="88" y="272" width="18" height="16" className={styles.traceAccent} />
+
+        {/* Alarm bell / flow switch */}
+        <circle data-draw cx="58" cy="70" r="8" className={styles.traceDim} />
+        <path data-draw d="M54 70 L62 70 M58 66 L58 74" className={styles.traceDim} />
+
+        {/* Dimension ticks */}
+        <line data-draw x1="110" y1="268" x2="260" y2="268" className={styles.traceDim} />
+        <line data-draw x1="110" y1="264" x2="110" y2="272" className={styles.traceDim} />
+        <line data-draw x1="260" y1="264" x2="260" y2="272" className={styles.traceDim} />
+
+        {/* Nodes — heads + valves (filled, no draw) */}
+        <circle cx="58" cy="110" r="3.5" className={styles.nodeAccent} />
+        <circle cx="110" cy="128" r="2.8" className={styles.node} />
+        <circle cx="160" cy="128" r="2.8" className={styles.node} />
+        <circle cx="210" cy="128" r="2.8" className={styles.nodeAccent} />
+        <circle cx="260" cy="128" r="2.8" className={styles.node} />
+        <circle cx="110" cy="178" r="2.8" className={styles.node} />
+        <circle cx="160" cy="178" r="2.8" className={styles.nodeAccent} />
+        <circle cx="210" cy="178" r="2.8" className={styles.node} />
+        <circle cx="260" cy="178" r="2.8" className={styles.node} />
+        <circle cx="110" cy="228" r="2.8" className={styles.node} />
+        <circle cx="160" cy="228" r="2.8" className={styles.node} />
+        <circle cx="210" cy="228" r="2.8" className={styles.nodeAccent} />
+        <circle cx="260" cy="228" r="2.8" className={styles.node} />
+        <circle cx="97" cy="280" r="3" className={styles.nodeAccent} />
       </svg>
       <div className={styles.schematicCaption} aria-hidden="true">
         <span className={styles.captionDot} />
-        SCHEMATIC
+        SPRINKLER RISER
+      </div>
+      <div className={styles.layerLegend} aria-hidden="true">
+        <span>
+          <i className={styles.legBatt} /> Riser / main
+        </span>
+        <span>
+          <i className={styles.legFoam} /> Branch line
+        </span>
+        <span>
+          <i className={styles.legAir} /> Head / FDC
+        </span>
       </div>
     </div>
   );
 }
 
 export default function WelcomePage() {
-const badgeText = 'Waco\'s Most Trusted Fire Protection Pros — Since 2001';
-const headlineLines = [
-  'Systems Protected.',
-  'Code Right.',
-];
-const headlineAccent = 'Sentinel Fire Protection.';
-const subheadline = 'Alarms · Sprinklers · Inspections · Monitoring. Flat-rate pricing. Same-day service. Code-Compliant Installs · Inspection On-Time Guarantee. Serving Waco and Central Texas with licensed fire protection technicians.';
-const primaryCta = { label: 'Call (254) 900-1111', href: 'tel:+12549001111' };
-const secondaryCta = { label: 'Free Estimate', href: '/contact' };
-const chips = [
-  'Same-Day Service',
-  'No Contracts',
-  'Licensed Fire Alarm Contractor',
-  '25+ Yrs Local',
-  'Code-Compliant Installs',
-];
-const stats = [
-  {
-    "value": "500+",
-    "label": "Jobs Done"
-  },
-  {
-    "value": "4.9 ★",
-    "label": "Rating"
-  },
-  {
-    "value": "15+",
-    "label": "Years Local"
-  },
-  {
-    "value": "1-Yr",
-    "label": "Warranty"
-  }
-];
-const meterTarget = 72;
-const meterTopLabel = "Alert";
-const meterMidLabel = "Monitor";
-const meterBotLabel = "Secure";
-const particleColor = '#dc2626';
-const beforeImageSrc = '/pages/home/welcome/before.jpg';
-const afterImageSrc = '/pages/home/welcome/after.jpg';
-const beforeLabel = "Failed inspection";
-const afterLabel = "Compliant";
-const mapCenterLabel = 'Service HQ';
-const mapPins = [
-  { label: 'Waco', x: 42, y: 48 },
-  { label: 'Temple', x: 68, y: 62 },
-  { label: 'Killeen', x: 58, y: 72 },
-];
-const coverageLabel = 'Central Texas coverage';
-const materials = [
-  { name: "Sprinkler", swatch: "#dc2626", imageSrc: "/pages/home/welcome/mat-1.jpg" },
-  { name: "Extinguisher", swatch: "#ef4444", imageSrc: "/pages/home/welcome/mat-2.jpg" },
-  { name: "Kitchen Hood", swatch: "#b91c1c", imageSrc: "/pages/home/welcome/mat-3.jpg" },
-  { name: "Backflow", swatch: "#f87171", imageSrc: "/pages/home/welcome/mat-1.jpg" },
-  { name: "Monitoring", swatch: "#991b1b", imageSrc: "/pages/home/welcome/mat-2.jpg" },
-  { name: "Impairment", swatch: "#7f1d1d", imageSrc: "/pages/home/welcome/mat-3.jpg" }
-];
-const quote = "We needed a clean inspection window. Sentinel handled impairments and paper trail — passed first time.";
-const authorName = "Facilities Lead";
-const authorMeta = "Multi-tenant · Waco";
-const rating = 5;
-const schematicLabel = "Sentinel schematic";
-const gauges = [
-  { label: "Sites", value: "900+" },
-  { label: "Rating", value: "4.8 ★" },
-  { label: "Docs", value: "Same day" },
-  { label: "Emergency", value: "Yes" }
-];
-const toggles = [
-  { label: "Licensed crew", on: true },
-  { label: "Same-week", on: true },
-  { label: "Warrantied", on: true }
-];
-const textureSrc = '/pages/home/welcome/hero-main.jpg';
-const textureAlt = 'Texture';
-const accentWord = "Sentinel";
+  const badgeText = "Waco's Most Trusted Fire Protection Pros — Since 2001";
+  const headlineLines = ['Systems Protected.', 'Code Right.'];
+  const headlineAccent = 'Sentinel Fire Protection.';
+  const subheadline =
+    'Alarms · Sprinklers · Inspections · Monitoring. Flat-rate pricing. Same-day service. Code-Compliant Installs · Inspection On-Time Guarantee. Serving Waco and Central Texas with licensed fire protection technicians.';
+  const primaryCta = { label: 'Call (254) 900-1111', href: 'tel:+12549001111' };
+  const secondaryCta = { label: 'Free Estimate', href: '/contact' };
+  const chips = [
+    'Same-Day Service',
+    'No Contracts',
+    'Licensed Fire Alarm Contractor',
+    '25+ Yrs Local',
+    'Code-Compliant Installs',
+  ];
+  const schematicLabel = 'Sentinel schematic';
 
   return (
     <section className={styles.hero} aria-label="Hero">
@@ -215,7 +181,10 @@ const accentWord = "Sentinel";
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             {headlineLines.map((line, i) => (
-              <React.Fragment key={i}>{line}<br /></React.Fragment>
+              <React.Fragment key={i}>
+                {line}
+                <br />
+              </React.Fragment>
             ))}
             <span className={styles.accentLine}>{headlineAccent}</span>
           </motion.h1>
