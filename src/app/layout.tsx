@@ -1,5 +1,5 @@
 // src/app/layout.tsx
-// Arctic Air HVAC — root layout
+// Sentinel Fire Protection — root layout
 //
 // MOBILE / SAFE-AREA FIX:
 //   Added a Next.js 14+ `viewport` export with:
@@ -60,21 +60,14 @@ const aBeeZee = ABeeZee({
 
 const isProduction = process.env.NODE_ENV === "production";
 const BASE_URL = isProduction
-  ? "https://www.arcticairhvac.com"
+  ? "https://www.sentinelfiretx.com"
   : "http://localhost:3000";
 
 // ── VIEWPORT ──────────────────────────────────────────────────────────────────
-// Next.js 14+ moved viewport / themeColor / colorScheme out of `metadata` and
-// into a separate `viewport` export. The `viewportFit: 'cover'` is the single
-// most important line in this file for the notch / home-indicator fix.
 export const viewport: Viewport = {
   width:        "device-width",
   initialScale: 1,
   viewportFit:  "cover",
-  // Two themeColor entries so iOS Safari can pick the right one when the user
-  // toggles light/dark mode. Both are obsidian dark to match the brand bg
-  // applied to <body> in globals.css. Adjust if you want a lighter Safari
-  // chrome tint for light-mode users.
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#0d1b2a" },
     { media: "(prefers-color-scheme: dark)",  color: "#0d1b2a" },
@@ -85,42 +78,42 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Arctic Air HVAC | AC Repair, Heating & Installation — Waco, TX",
-    template: "%s | Arctic Air HVAC",
+    default: "Sentinel Fire Protection | Alarms, Sprinklers, Inspections & Monitoring — Waco, TX",
+    template: "%s | Sentinel Fire Protection",
   },
   description:
-    "Arctic Air HVAC is a Waco, TX heating and cooling company offering AC repair, furnace service, new system installation, duct cleaning, and maintenance plans for Central Texas homes and businesses. Licensed, local, no contracts.",
+    "Sentinel Fire Protection is a Waco, TX fire protection company offering fire alarm systems, sprinkler systems, extinguishers, kitchen hood suppression, monitoring, and annual inspections for Central Texas businesses and multifamily properties. Licensed Fire Alarm Contractor · Bonded & Insured.",
   keywords: [
-    "Arctic Air HVAC",
-    "HVAC company Waco TX",
-    "AC repair Waco Texas",
-    "air conditioning installation Waco",
-    "furnace repair Central Texas",
-    "heating and cooling Waco TX",
-    "HVAC contractor Hewitt TX",
-    "duct cleaning Waco",
-    "emergency AC repair Waco",
+    "Sentinel Fire Protection",
+    "fire alarm systems Waco TX",
+    "fire sprinkler inspection Waco Texas",
+    "kitchen hood suppression Central Texas",
+    "fire extinguisher service Waco",
+    "fire alarm monitoring Waco TX",
+    "annual fire inspection Hewitt TX",
+    "licensed fire alarm contractor Waco",
+    "restaurant fire protection Waco",
   ],
-  authors: [{ name: "Arctic Air HVAC", url: BASE_URL }],
-  creator: "Arctic Air HVAC",
-  publisher: "Arctic Air HVAC",
+  authors: [{ name: "Sentinel Fire Protection", url: BASE_URL }],
+  creator: "Sentinel Fire Protection",
+  publisher: "Sentinel Fire Protection",
   icons: {
     icon: [`${BASE_URL}/logos/favicon.ico?v=1`],
     apple: [`${BASE_URL}/logos/apple-touch-icon.png?v=1`],
     shortcut: [`${BASE_URL}/logos/apple-touch-icon.png?v=1`],
   },
   openGraph: {
-    title: "Arctic Air HVAC | AC Repair, Heating & Installation — Waco, TX",
+    title: "Sentinel Fire Protection | Alarms, Sprinklers, Inspections & Monitoring — Waco, TX",
     description:
-      "Waco-based HVAC company for AC repair, furnace service, new installations, and maintenance plans across Central Texas. Licensed & insured. No contracts.",
+      "Waco-based fire protection for alarms, sprinklers, extinguishers, kitchen hoods, monitoring, and annual inspections across Central Texas. Licensed Fire Alarm Contractor · Bonded & Insured. Code-Compliant Installs · Inspection On-Time Guarantee.",
     url: BASE_URL,
-    siteName: "Arctic Air HVAC",
+    siteName: "Sentinel Fire Protection",
     images: [
       {
-        url: `${BASE_URL}/logos/arctic-air-banner.png?v=1`,
+        url: `${BASE_URL}/logos/scott-apps-banner.png?v=1`,
         width: 1200,
         height: 630,
-        alt: "Arctic Air HVAC — Waco TX Air Conditioning & Heating",
+        alt: "Sentinel Fire Protection — Waco TX Fire Alarms, Sprinklers & Inspections",
       },
     ],
     locale: "en_US",
@@ -128,10 +121,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Arctic Air HVAC | Waco TX Heating & Cooling",
+    title: "Sentinel Fire Protection | Waco TX Fire Protection Pros",
     description:
-      "AC repair, heating service, new installations & maintenance plans for Central Texas. Licensed & insured — no contracts.",
-    images: [`${BASE_URL}/logos/arctic-air-banner.png?v=1`],
+      "Fire alarms, sprinklers, extinguishers, kitchen hood suppression, monitoring & annual inspections for Central Texas. Licensed & insured — code-compliant installs.",
+    images: [`${BASE_URL}/logos/scott-apps-banner.png?v=1`],
   },
   robots: {
     index: true,
@@ -155,27 +148,27 @@ const ratingValue = "5.0";
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "HVACBusiness",
+  "@type": "LocalBusiness",
   "@id": `${BASE_URL}/#organization`,
-  name: "Arctic Air HVAC",
-  alternateName: "Arctic Air Heating & Cooling",
+  name: "Sentinel Fire Protection",
+  alternateName: "Sentinel Fire Protection Waco",
   description:
-    "Residential and commercial HVAC services in Waco and Central Texas — AC repair, heating, new installations, duct cleaning, and maintenance plans. Licensed, insured, no contracts.",
+    "Fire protection services in Waco and Central Texas — fire alarm systems, sprinkler systems, extinguishers, kitchen hood suppression, monitoring, and annual inspections. Licensed Fire Alarm Contractor · Bonded & Insured. Code-Compliant Installs · Inspection On-Time Guarantee.",
   url: BASE_URL,
-  telephone: "+12549001234",
-  email: "contact@arcticairhvac.com",
-  foundingDate: "2010",
+  telephone: "+12549001111",
+  email: "hello@sentinelfiretx.com",
+  foundingDate: "2001",
   founder: {
     "@type": "Person",
-    name: "Mike Hawkins",
-    jobTitle: "Owner & Master HVAC Technician",
+    name: "Captain (ret.) Neil Briggs",
+    jobTitle: "Owner & Lead Fire Protection Specialist",
   },
   address: {
     "@type": "PostalAddress",
-    streetAddress: "4521 Bosque Blvd",
+    streetAddress: "1100 S 5th St",
     addressLocality: "Waco",
     addressRegion: "TX",
-    postalCode: "76710",
+    postalCode: "76706",
     addressCountry: "US",
   },
   geo: {
@@ -201,24 +194,22 @@ const localBusinessSchema = {
     { "@type": "City", name: "Waco",        containedInPlace: { "@type": "State", name: "Texas" } },
     { "@type": "City", name: "Hewitt",       containedInPlace: { "@type": "State", name: "Texas" } },
     { "@type": "City", name: "Woodway",      containedInPlace: { "@type": "State", name: "Texas" } },
-    { "@type": "City", name: "Robinson",     containedInPlace: { "@type": "State", name: "Texas" } },
+    { "@type": "City", name: "Bellmead",     containedInPlace: { "@type": "State", name: "Texas" } },
     { "@type": "City", name: "China Spring", containedInPlace: { "@type": "State", name: "Texas" } },
-    { "@type": "City", name: "Hillsboro",    containedInPlace: { "@type": "State", name: "Texas" } },
+    { "@type": "City", name: "McGregor",     containedInPlace: { "@type": "State", name: "Texas" } },
     { "@type": "City", name: "Temple",       containedInPlace: { "@type": "State", name: "Texas" } },
     { "@type": "City", name: "Killeen",      containedInPlace: { "@type": "State", name: "Texas" } },
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "HVAC Services",
+    name: "Fire Protection Services",
     itemListElement: [
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "AC Repair" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "AC Installation" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Heating Repair" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Furnace Installation" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Duct Cleaning" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "HVAC Maintenance Plans" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Indoor Air Quality" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Smart Thermostat Installation" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Fire Alarm Systems" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Sprinkler Systems" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Fire Extinguishers" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Kitchen Hood Suppression" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Monitoring" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Annual Inspections" } },
     ],
   },
   aggregateRating: {
@@ -232,7 +223,7 @@ const localBusinessSchema = {
   currenciesAccepted: "USD",
   paymentAccepted: "Cash, Credit Card, Check, Financing",
   sameAs: [
-    "https://www.facebook.com/arcticairhvac",
+    "https://www.facebook.com/sentinelfiretx",
     "https://www.google.com/maps/?cid=placeholder",
   ],
 };
@@ -254,12 +245,11 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {/* ConditionalShell shows Header/Footer only on non-admin pages */}
         <ConditionalShell>
           <Header />
         </ConditionalShell>
 
-        <NextTopLoader color="#f97316" showSpinner={false} />
+        <NextTopLoader color="#dc2626" showSpinner={false} />
 
         <Suspense fallback={null}>
           <Analytics />
@@ -275,10 +265,10 @@ export default function RootLayout({
                   alignItems: "center",
                   width: "100%",
                   height: "100vh",
-                  background: "#0a130a",
+                  background: "#0d1b2a",
                 }}
               >
-                <PulseLoader size={50} color="#f97316" />
+                <PulseLoader size={50} color="#dc2626" />
               </div>
             }
           >
@@ -294,7 +284,6 @@ export default function RootLayout({
           <CookieBanner />
         </Suspense>
 
-        {/* Footer only on non-admin pages */}
         <ConditionalShell>
           <Footer />
         </ConditionalShell>

@@ -37,9 +37,9 @@ const DEFAULT_GUARANTEES: Guarantee[] = [
   },
   {
     icon: faShieldHalved,
-    title: "1-Year Parts & Labor Warranty",
+    title: "Code-Compliant Installs",
     description:
-      "Every repair we perform is covered for a full year — parts and labor. If it fails within 12 months, we fix it at no charge.",
+      "Every installation is designed and documented to meet applicable codes and local AHJ expectations — not just until the next inspection.",
   },
   {
     icon: faRotateLeft,
@@ -49,15 +49,15 @@ const DEFAULT_GUARANTEES: Guarantee[] = [
   },
   {
     icon: faCertificate,
-    title: "NATE-Certified Technicians",
+    title: "Licensed Fire Alarm Contractor",
     description:
-      "Every tech who enters your home is NATE-certified and TDLR-licensed. No apprentices working alone — ever.",
+      "Every tech who works on your life-safety systems is part of a licensed, bonded & insured team. No unlicensed subs working alone.",
   },
   {
     icon: faCalendarCheck,
-    title: "No Contracts. No Lock-In.",
+    title: "Inspection On-Time Guarantee",
     description:
-      "Our maintenance plans are month-to-month. We earn your business with every visit — not by holding you hostage with a contract.",
+      "Scheduled annual and periodic inspections stay on the calendar so you're never scrambling before an AHJ visit.",
   },
   {
     icon: faStar,
@@ -80,7 +80,6 @@ const GuaranteeSection: React.FC<GuaranteeSectionProps> = ({
     <section className={styles.section} aria-label="Our Guarantees">
       <div className={styles.container}>
 
-        {/* Left: headline + CTA */}
         <div className={styles.leftCol}>
           <span className={styles.eyebrow}>{title}</span>
           <h2 className={styles.headline}>
@@ -92,7 +91,7 @@ const GuaranteeSection: React.FC<GuaranteeSectionProps> = ({
             ))}
           </h2>
           <p className={styles.body}>
-            Every HVAC company in Central Texas makes promises. We back ours in writing — with flat-rate pricing, certified technicians, and a 1-year warranty on every repair we touch.
+            Every fire protection company in Central Texas makes promises. We back ours in writing — with flat-rate pricing, a Licensed Fire Alarm Contractor team, and Code-Compliant Installs · Inspection On-Time Guarantee on every job we touch.
           </p>
           <Link
             href={ctaLink}
@@ -117,11 +116,10 @@ const GuaranteeSection: React.FC<GuaranteeSectionProps> = ({
                 </svg>
               ))}
             </div>
-            <span className={styles.ratingText}>4.9 · 300+ verified Google reviews</span>
+            <span className={styles.ratingText}>4.9 · 650+ verified Google reviews</span>
           </div>
         </div>
 
-        {/* Right: guarantee cards */}
         <div className={styles.rightCol}>
           <div className={styles.grid}>
             {guarantees.map((g, i) => (

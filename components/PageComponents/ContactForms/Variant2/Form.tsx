@@ -10,8 +10,8 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleCheck, faExclamationTriangle, faArrowRight,
-  faFan, faFire, faWrench, faFilter, faThermometerHalf,
-  faWind, faBolt,
+  faWrench, faLink, faDoorOpen, faCogs, faClipboardList,
+  faBuilding, faBolt,
 } from '@fortawesome/free-solid-svg-icons';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getJourneyContext } from '&/useJourneyTracker';
@@ -22,13 +22,13 @@ interface Variant2Props {
 }
 
 const SERVICES = [
-  { icon: faFan,             label: 'AC Repair' },
-  { icon: faFire,            label: 'Heating / Furnace' },
-  { icon: faWrench,          label: 'New Installation' },
-  { icon: faFilter,          label: 'Duct Cleaning' },
-  { icon: faThermometerHalf, label: 'Maintenance' },
-  { icon: faWind,            label: 'Air Quality' },
-  { icon: faBolt,            label: 'Emergency' },
+  { icon: faWrench,        label: 'Fire Alarm Systems' },
+  { icon: faLink,          label: 'Sprinkler Systems' },
+  { icon: faDoorOpen,      label: 'Fire Extinguishers' },
+  { icon: faCogs,          label: 'Kitchen Hood Suppression' },
+  { icon: faClipboardList, label: 'Monitoring' },
+  { icon: faBuilding,      label: 'Annual Inspections' },
+  { icon: faBolt,          label: 'Emergency' },
 ];
 
 export default function Variant2({ title, cityName, slug, spot, formVariant }: Variant2Props) {
@@ -95,13 +95,13 @@ export default function Variant2({ title, cityName, slug, spot, formVariant }: V
               <p className={styles.quoteText}>
                 "Flat price. Show up on time. Fix it right. That's all anyone ever wants — and that's exactly what we do."
               </p>
-              <span className={styles.quoteAttrib}>— Arctic Air HVAC, Waco TX</span>
+              <span className={styles.quoteAttrib}>— Sentinel Fire Protection, Waco TX</span>
 
               <div className={styles.panelStats}>
                 {[
                   { val: '2,400+', lbl: 'Systems Served' },
                   { val: '4.9★',   lbl: 'Google Rating' },
-                  { val: '15+',    lbl: 'Years Local' },
+                  { val: '25+',    lbl: 'Years Local' },
                 ].map(s => (
                   <div key={s.lbl} className={styles.statBlock}>
                     <span className={styles.statVal}>{s.val}</span>
@@ -111,7 +111,7 @@ export default function Variant2({ title, cityName, slug, spot, formVariant }: V
               </div>
 
               <div className={styles.panelBadges}>
-                {['Same-Day Available', '1-Year Warranty', 'No Contracts', 'NATE Certified'].map(b => (
+                {['Same-Day Available', '2-Year Warranty', 'No Contracts', 'Licensed Fire Alarm Contractor'].map(b => (
                   <span key={b} className={styles.panelBadge}>
                     <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
                     {b}
