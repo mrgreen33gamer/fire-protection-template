@@ -19,7 +19,7 @@ const ALL_POSTS: BlogPost[] = [
     category: 'Inspections',
     date:     'July 3, 2026',
     readTime: 7,
-    imageSrc: '/pages/blogs/heat-pump.jpg',
+    imageSrc: '/pages/home/services/service-1.jpg',
     imageAlt: 'Fire sprinkler inspection frequency guide for Waco TX facilities',
     featured: true,
   },
@@ -30,7 +30,7 @@ const ALL_POSTS: BlogPost[] = [
     category: 'Kitchen Hood',
     date:     'June 24, 2026',
     readTime: 6,
-    imageSrc: '/pages/blogs/energy-savings.jpg',
+    imageSrc: '/pages/home/welcome/after.jpg',
     imageAlt: 'Restaurant kitchen hood suppression requirements for Texas',
   },
   {
@@ -40,7 +40,7 @@ const ALL_POSTS: BlogPost[] = [
     category: 'Monitoring',
     date:     'June 15, 2026',
     readTime: 8,
-    imageSrc: '/pages/blogs/ac-replacement.jpg',
+    imageSrc: '/pages/home/welcome/hero-main.jpg',
     imageAlt: 'Fire alarm monitoring value guide for Central Texas buildings',
   },
 ];

@@ -35,36 +35,42 @@ export default function HomePage() {
       title: "Fire Alarm Systems",
       body: "Design, install, service, and expand conventional and addressable fire alarm systems — detectors, NAC circuits, panels, and AHJ documentation.",
       link: "/services/fire-alarms",
+      image: "/pages/home/services/service-1.jpg",
     },
     {
       icon: faFire,
       title: "Sprinkler Systems",
       body: "Wet, dry, and pre-action sprinkler service — head replacement, riser work, hydro tests, and impairment procedures coordinated with your facility.",
       link: "/services/sprinkler-systems",
+      image: "/pages/home/services/service-2.jpg",
     },
     {
       icon: faFireExtinguisher,
       title: "Fire Extinguishers",
       body: "Annual extinguisher service, hydro testing, new units, and tagged inventory for offices, restaurants, multifamily, and industrial sites.",
       link: "/services/fire-extinguishers",
+      image: "/pages/home/services/service-3.jpg",
     },
     {
       icon: faShieldHalved,
       title: "Kitchen Hood Suppression",
       body: "Ansul and kitchen hood system inspection, link replacement, cylinder service, and semi-annual certification for restaurants and food service.",
       link: "/services/kitchen-hood",
+      image: "/pages/home/services/service-4.jpg",
     },
     {
       icon: faSatelliteDish,
       title: "Monitoring",
       body: "24/7 central station fire alarm monitoring with signal testing, account setup, and clear communication with your AHJ and insurance carrier.",
       link: "/services/monitoring",
+      image: "/pages/home/services/service-1.jpg",
     },
     {
       icon: faClipboardCheck,
       title: "Annual Inspections",
       body: "NFPA-aligned annual and periodic inspections with deficiency reports, re-inspections, and inspection-on-time scheduling you can count on.",
       link: "/services/annual-inspections",
+      image: "/pages/home/services/service-2.jpg",
     },
   ];
 
@@ -180,13 +186,10 @@ export default function HomePage() {
 
   return (
     <main className={styles.pageWrapper}>
-
       <WelcomePage />
-
       <TrustBar
         headline="Waco's trusted fire protection company — licensed, insured, and code-compliant on every job"
       />
-
       <div className={styles.section}>
         <ImpactMetrics
           title="Numbers That Speak for Us"
@@ -194,14 +197,6 @@ export default function HomePage() {
           cityName="Waco"
         />
       </div>
-
-      <div className={styles.section}>
-        <ServiceCardComponent
-          heading="Complete Fire Protection Services for Your Facility"
-          cards={services}
-        />
-      </div>
-
       <div className={styles.section}>
         <WhyChooseUs
           cityName="Waco"
@@ -209,7 +204,54 @@ export default function HomePage() {
           title="What Makes Sentinel Fire Protection Different"
         />
       </div>
-
+      <div className={styles.section}>
+        <ServiceCardComponent
+          heading="Complete Fire Protection Services for Your Facility"
+          cards={services}
+        />
+      </div>
+      <div className={styles.section}>
+        <GuaranteeSection />
+      </div>
+      <div className={styles.section}>
+        <ProcessTimeline steps={processSteps} />
+      </div>
+      <div className={styles.section}>
+        <Testimonials testimonials={reviews} />
+      </div>
+      <CTABanner
+        headline="Inspection-Ready Fire Protection."
+        subline="Sprinklers, extinguishers, and alarm-related protection work with documentation your AHJ expects."
+        primaryText="Call (254) 900-1111"
+        primaryLink="tel:+12549001111"
+        secondaryText="Schedule Inspection"
+        secondaryLink="/contact"
+        imageSrc="/pages/home/welcome/hero-main.jpg"
+      />
+      <div className={styles.section}>
+        <LocalServiceAreas
+          cityName="Waco"
+          areas={localAreas}
+          servicePath=""
+          title="Serving All of Central Texas"
+        />
+      </div>
+      <div className={styles.section}>
+        <WhatToExpect
+          sectionTitle="Every Service Call, Every Time"
+          expectations={expectations}
+        />
+      </div>
+      <div className={styles.section}>
+        <FAQ
+          cityName="Waco"
+          faq={faq}
+          title="Fire Protection Questions — Answered Straight"
+        />
+      </div>
+      <div className={styles.section}>
+        <BlogPreviewGrid />
+      </div>
       <div className={styles.section}>
         <Variant4
           title="Request Service or a Free Quote"
@@ -219,56 +261,6 @@ export default function HomePage() {
           formVariant={2}
         />
       </div>
-
-      <div className={styles.section}>
-        <ProcessTimeline steps={processSteps} />
-      </div>
-
-      <div className={styles.section}>
-        <Testimonials testimonials={reviews} />
-      </div>
-
-      <div className={styles.section}>
-        <GuaranteeSection />
-      </div>
-
-      <CTABanner
-        headline="Alarm Trouble? Inspection Due? We're Ready Right Now."
-        subline="Same-day appointments across Waco, Hewitt, Woodway, Temple, and all of Central Texas. Flat-rate pricing. Code-Compliant Installs · Inspection On-Time Guarantee."
-        primaryText="Call (254) 900-1111"
-        primaryLink="tel:+12549001111"
-        secondaryText="Book Online"
-        secondaryLink="/contact"
-      />
-
-      <div className={styles.section}>
-        <LocalServiceAreas
-          cityName="Waco"
-          areas={localAreas}
-          servicePath=""
-          title="Serving All of Central Texas"
-        />
-      </div>
-
-      <div className={styles.section}>
-        <WhatToExpect
-          sectionTitle="Every Service Call, Every Time"
-          expectations={expectations}
-        />
-      </div>
-
-      <div className={styles.section}>
-        <FAQ
-          cityName="Waco"
-          faq={faq}
-          title="Fire Protection Questions — Answered Straight"
-        />
-      </div>
-
-      <div className={styles.section}>
-        <BlogPreviewGrid />
-      </div>
-
     </main>
   );
 }

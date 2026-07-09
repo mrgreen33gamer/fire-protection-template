@@ -1,44 +1,30 @@
-// src/app/globalVariables.scss
-// ─────────────────────────────────────────────────────────────────────────────
-// Sentinel Fire Protection — Brand Tokens
-//
-// THREE DISTINCT FONTS:
-//   $titleFont  → Barlow Condensed  — bold condensed display (hero h1, section titles)
-//   $headerFont → Outfit            — clean geometric sans   (nav, card titles, labels, CTAs)
-//   $textFont   → Inter             — refined humanist sans  (body copy, form text, paragraphs)
-//
-// Usage guide:
-//   h1, .hero headline              → $titleFont  (uppercase, tight tracking)
-//   h2, h3, nav links, btn text     → $headerFont (medium weight, normal case)
-//   p, label, input, small text     → $textFont   (regular/medium weight)
-// ─────────────────────────────────────────────────────────────────────────────
+// Auto uniqueness tokens — safety critical red
+$titleFont:  var(--font-title),  'Black Ops One', sans-serif;
+$headerFont: var(--font-header), 'Barlow Semi Condensed', sans-serif;
+$textFont:   var(--font-body),   'Roboto', sans-serif;
 
-$titleFont:  var(--font-barlow-condensed), 'Barlow Condensed', sans-serif;
-$headerFont: var(--font-outfit),           'Outfit',           sans-serif;
-$textFont:   var(--font-inter),            'Inter',            sans-serif;
-
-// ── Core Palette ─────────────────────────────────────────────────────────────
 $black:      #000000;
-$obsidian:   #0d1b2a;
-$blackflat:  #1a2a3a;
+$obsidian:   #1a0505;
+$blackflat:  #1a0505;
 $white:      #FFFFFF;
-$offwhite:   #f8fafc;
+$offwhite:   #fef2f2;
 
-// Greys (navy-tinted)
-$darkgrey:   #7a9bb5;
-$grey:       #4a6a85;
-$lightgrey:  #c8d8e8;
+$darkgrey:   #94a3b8;
+$grey:       #64748b;
+$lightgrey:  #e2e8f0;
 
-// Brand Accent — fire red
 $orange:     #dc2626;
-$lightorange:#ef4444;
+$lightorange:#f87171;
 $darkorange: #991b1b;
 
-// Legacy aliases
 $green:      $orange;
 $lightgreen: $lightorange;
 $darkgreen:  $darkorange;
-$blue:       #1e6fa8;
+$blue:       #dc2626;
 
-// Error
+$radius-sm:  2px;
+$radius-md:  4px;
+$radius-lg:  6px;
+$radius-pill: 2px;
+
 $danger-red: #ef4444;
