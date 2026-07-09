@@ -1,58 +1,37 @@
 // src/app/services/layout.tsx
-// ─────────────────────────────────────────────────────────────────────────────
-// ✅ FIX: This file was previously a copy of
-//    /services/website-design/killeen-tx/layout.tsx (KilleenWebDesignLayout).
-//    That caused a metadata collision — Google saw Killeen keyword targeting
-//    on the /services parent route.
-//
-//    This is now the correct /services parent layout with:
-//    - Broad "all services" metadata (no city/keyword cannibalization)
-//    - OfferCatalog schema listing all 4 services
-//    - BreadcrumbList for the /services route
-// ─────────────────────────────────────────────────────────────────────────────
+// Sentinel Fire Protection — /services parent layout
 import type { Metadata } from "next";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://hvac-pro-template.vercel.app';
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.sentinelfiretx.com';
 const url = `${BASE_URL}/services`;
 
 export const metadata: Metadata = {
-  title: "Services | Web Design, Software, Branding & Marketing | Scott Applications",
+  title: "Fire Protection Services | Alarms, Sprinklers, Inspections & More | Sentinel Fire Protection",
   description:
-    "Scott Applications offers custom web design, software engineering, graphic design, and digital marketing for Central Texas businesses. Fixed pricing, no contracts, you own everything.",
+    "Sentinel Fire Protection offers fire alarm systems, sprinkler systems, extinguishers, kitchen hood suppression, monitoring, and annual inspections for Waco and Central Texas. Licensed Fire Alarm Contractor · Bonded & Insured.",
   keywords: [
-    "web design Waco TX",
-    "custom software Central Texas",
-    "graphic design Waco",
-    "digital marketing Waco TX",
-    "Scott Applications services",
-    "digital agency Waco Texas",
-    "website development Central Texas",
-    "local SEO Waco",
+    "fire alarm systems Waco TX",
+    "fire protection services Waco",
+    "sprinkler inspection Central Texas",
+    "kitchen hood suppression Waco TX",
+    "fire protection company Texas",
+    "annual fire inspection Waco",
+    "licensed fire alarm contractor Waco",
   ],
-  alternates: {
-    canonical: url,
-  },
+  alternates: { canonical: url },
   openGraph: {
-    title: "Services | Web Design, Software, Branding & Marketing | Scott Applications",
+    title: "Fire Protection Services | Sentinel Fire Protection",
     description:
-      "Custom websites, software, branding, and marketing for Central Texas businesses. Fixed price, no contracts, direct developer access.",
+      "Alarms, sprinklers, extinguishers, kitchen hoods, monitoring, and annual inspections for Waco and Central Texas. Licensed Fire Alarm Contractor · Code-Compliant Installs.",
     url,
-    siteName: "Scott Applications",
+    siteName: "Sentinel Fire Protection",
     locale: "en_US",
     type: "website",
-    images: [
-      {
-        url: `${BASE_URL}/logos/scott-apps-banner.png?v=3`,
-        alt: "Scott Applications — Services for Central Texas Businesses",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Services | Scott Applications",
-    description:
-      "Web design, custom software, graphic design, and digital marketing for Central Texas. Fixed pricing, full ownership.",
-    images: [`${BASE_URL}/logos/scott-apps-banner.png?v=3`],
+    title: "Fire Protection Services | Sentinel Fire Protection",
+    description: "Alarms, sprinklers, inspections & more for Central Texas. Licensed Fire Alarm Contractor.",
   },
   robots: { index: true, follow: true },
 };
@@ -60,85 +39,30 @@ export const metadata: Metadata = {
 const offerCatalogSchema = {
   "@context": "https://schema.org",
   "@type": "OfferCatalog",
-  name: "Scott Applications — Digital Services",
+  name: "Sentinel Fire Protection — Fire Protection Services",
   description:
-    "Full-service digital agency offerings for Central Texas businesses: web design, custom software, graphic design, and digital marketing.",
+    "Fire protection services for Waco and Central Texas: fire alarms, sprinklers, extinguishers, kitchen hood suppression, monitoring, and annual inspections.",
   provider: {
     "@type": "LocalBusiness",
-    name: "Scott Applications",
+    name: "Sentinel Fire Protection",
     url: BASE_URL,
-    telephone: "+12549002520",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Waco",
-      addressRegion: "TX",
-      addressCountry: "US",
-    },
+    telephone: "+12549001111",
+    address: { "@type": "PostalAddress", addressLocality: "Waco", addressRegion: "TX", addressCountry: "US" },
   },
   itemListElement: [
-    {
-      "@type": "Offer",
-      itemOffered: {
-        "@type": "Service",
-        name: "Website Design",
-        description:
-          "Mobile-first, SEO-optimized websites built on Next.js for Central Texas businesses. Fixed price, you own everything.",
-        url: `${BASE_URL}/services/website-design`,
-      },
-    },
-    {
-      "@type": "Offer",
-      itemOffered: {
-        "@type": "Service",
-        name: "Software Engineering",
-        description:
-          "Custom CRMs, client portals, business tools, and web applications. Fixed price, direct developer access.",
-        url: `${BASE_URL}/services/software-engineering`,
-      },
-    },
-    {
-      "@type": "Offer",
-      itemOffered: {
-        "@type": "Service",
-        name: "Graphic Design",
-        description:
-          "Custom logos, brand identities, and marketing collateral. Unlimited revisions, full source file ownership.",
-        url: `${BASE_URL}/services/graphic-design`,
-      },
-    },
-    {
-      "@type": "Offer",
-      itemOffered: {
-        "@type": "Service",
-        name: "Digital Marketing & Local SEO",
-        description:
-          "Local SEO, Google Ads, Google Business Profile management, and social media. Month-to-month, no contracts.",
-        url: `${BASE_URL}/services/marketing-solutions`,
-      },
-    },
-  ],
-};
-
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home",     item: BASE_URL },
-    { "@type": "ListItem", position: 2, name: "Services", item: url },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Fire Alarm Systems", url: `${BASE_URL}/services/fire-alarms` } },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Sprinkler Systems", url: `${BASE_URL}/services/sprinkler-systems` } },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Fire Extinguishers", url: `${BASE_URL}/services/fire-extinguishers` } },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Kitchen Hood Suppression", url: `${BASE_URL}/services/kitchen-hood` } },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Monitoring", url: `${BASE_URL}/services/monitoring` } },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Annual Inspections", url: `${BASE_URL}/services/annual-inspections` } },
   ],
 };
 
 export default function ServicesLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(offerCatalogSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(offerCatalogSchema) }} />
       {children}
     </>
   );
