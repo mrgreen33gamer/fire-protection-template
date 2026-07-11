@@ -118,7 +118,7 @@ export const metadata: Metadata = {
     siteName: "Sentinel Fire Protection",
     images: [
       {
-        url: `${BASE_URL}/logos/scott-apps-banner.png?v=1`,
+        url: `${BASE_URL}/pages/home/welcome/hero-main.jpg`,
         width: 1200,
         height: 630,
         alt: "Sentinel Fire Protection — Waco TX Fire Alarms, Sprinklers & Inspections",
@@ -132,7 +132,7 @@ export const metadata: Metadata = {
     title: "Sentinel Fire Protection | Waco TX Fire Protection Pros",
     description:
       "Fire alarms, sprinklers, extinguishers, kitchen hood suppression, monitoring & annual inspections for Central Texas. Licensed & insured — code-compliant installs.",
-    images: [`${BASE_URL}/logos/scott-apps-banner.png?v=1`],
+    images: [`${BASE_URL}/pages/home/welcome/hero-main.jpg`],
   },
   robots: {
     index: true,

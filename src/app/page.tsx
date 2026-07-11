@@ -63,14 +63,14 @@ export default function HomePage() {
       title: "Monitoring",
       body: "24/7 central station fire alarm monitoring with signal testing, account setup, and clear communication with your AHJ and insurance carrier.",
       link: "/services/monitoring",
-      image: "/pages/home/services/service-1.jpg",
+      image: "/pages/home/welcome/before.jpg",
     },
     {
       icon: faClipboardCheck,
       title: "Annual Inspections",
       body: "NFPA-aligned annual and periodic inspections with deficiency reports, re-inspections, and inspection-on-time scheduling you can count on.",
       link: "/services/annual-inspections",
-      image: "/pages/home/services/service-2.jpg",
+      image: "/pages/home/welcome/after.jpg",
     },
   ];
 
