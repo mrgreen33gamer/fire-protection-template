@@ -36,7 +36,7 @@ const personSchema = {
 
 const AuthorBio: React.FC<AuthorBioProps> = ({
   cityName,
-  imageSrc = "/pages/seo-template-resources/owner.jpg",
+  imageSrc = "/pages/home/welcome/hero-main.jpg",
   imageAlt = "Captain (ret.) Neil Briggs - Owner of Sentinel Fire Protection",
 }) => {
   const trackEvent = useTrackEvent();
