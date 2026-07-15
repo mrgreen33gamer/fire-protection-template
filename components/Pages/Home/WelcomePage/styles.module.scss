@@ -1,62 +1,76 @@
-// Hero F — Blueprint Schematic
-// @use path assumes adaptation into components/Pages/Home/WelcomePage/
+// Fire Protection Hero — Sentinel (safety-critical red)
+// Photographic parallax stage, safety-red scrim, Black Ops One headline, and an
+// authentic fire-sprinkler photo card replacing the blueprint schematic.
 @use '../../../../src/app/globalVariables.scss' as *;
 
 .hero {
   position: relative;
-  height: 100svh;
+  min-height: 100svh;
   background: $obsidian;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  isolation: isolate;
 
-  &::before {
+  // Fine grain so the dark reads as material, not flat black.
+  // Sits above the photo + scrim, below the content.
+  &::after {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: repeating-linear-gradient(
-      -55deg,
-      transparent,
-      transparent 22px,
-      rgba($white, 0.012) 22px,
-      rgba($white, 0.012) 23px
-    );
+    z-index: 2;
+    opacity: 0.4;
     pointer-events: none;
-    z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
   }
 }
 
-.shard {
+// ── Photographic parallax background ──────────────────────────────────────────
+.bgLayer {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 48%;
-  height: 100%;
-  background: linear-gradient(
-    135deg,
-    transparent 0%,
-    rgba($orange, 0.02) 35%,
-    rgba($orange, 0.055) 100%
-  );
-  clip-path: polygon(22% 0%, 100% 0%, 100% 100%, 0% 100%);
-  pointer-events: none;
+  top: -8%;
+  left: 0;
+  width: 100%;
+  height: 116%;
+  z-index: 0;
+  will-change: transform;
+}
+
+.bgImage {
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+// Safety-red scrim — keeps the riser-bank photo on-brand and the headline legible.
+// Darker on the left (text column), lighter on the right (photo card).
+.scrim {
+  position: absolute;
+  inset: 0;
   z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 82% 16%, rgba($orange, 0.22) 0%, rgba($orange, 0) 55%),
+    radial-gradient(90% 80% at 10% 94%, rgba($darkorange, 0.28) 0%, rgba($darkorange, 0) 60%),
+    linear-gradient(100deg, rgba(14, 3, 3, 0.95) 0%, rgba(18, 4, 4, 0.84) 42%, rgba(20, 5, 5, 0.52) 74%, rgba(20, 5, 5, 0.4) 100%),
+    linear-gradient(180deg, rgba(14, 3, 3, 0.4) 0%, rgba(14, 3, 3, 0) 32%, rgba(14, 3, 3, 0.6) 100%);
 }
 
 .layout {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   max-width: 1380px;
+  width: 100%;
   margin: 0 auto;
-  padding: clamp(6rem, 11vh, 9rem) clamp(1.5rem, 5vw, 5rem) clamp(5rem, 9vh, 7rem);
+  padding: clamp(6rem, 11vh, 9rem) clamp(1.5rem, 5vw, 5rem) clamp(4rem, 8vh, 6rem);
   display: grid;
-  grid-template-columns: minmax(0, 560px) 1fr;
-  gap: clamp(2rem, 4vw, 5rem);
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 460px);
+  gap: clamp(2rem, 4vw, 4.5rem);
   align-items: center;
 
   @media (max-width: 960px) {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 3rem;
-    padding: clamp(5rem, 9vh, 7rem) 1.5rem clamp(4rem, 7vh, 6rem);
+    gap: 2.5rem;
   }
 }
 
@@ -79,11 +93,11 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba($orange, 0.9);
-  border: 1px solid rgba($orange, 0.28);
-  background: rgba($orange, 0.07);
-  border-radius: 9999px;
-  padding: 0.35rem 0.95rem;
+  color: $lightorange;
+  border: 1px solid rgba($orange, 0.42);
+  background: rgba($orange, 0.1);
+  border-radius: 16px;
+  padding: 0.4rem 1rem;
   width: fit-content;
 }
 
@@ -92,7 +106,7 @@
   height: 7px;
   border-radius: 50%;
   background: $orange;
-  box-shadow: 0 0 8px rgba($orange, 0.8);
+  box-shadow: 0 0 8px 1px rgba($orange, 0.8);
   animation: pulse 2.4s ease-in-out infinite;
   flex-shrink: 0;
 }
@@ -111,12 +125,14 @@
 
 .headline {
   font-family: $titleFont;
-  font-size: clamp(2.9rem, 5.5vw, 5.4rem);
+  font-size: clamp(2.8rem, 5.2vw, 5rem);
   font-weight: 800;
-  line-height: 0.95;
-  letter-spacing: -0.02em;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
   color: $white;
   margin: 0;
+  text-wrap: balance;
 }
 
 .accentLine {
@@ -125,14 +141,14 @@
 
 .sub {
   font-family: $textFont;
-  font-size: clamp(1rem, 1.4vw, 1.15rem);
-  line-height: 1.55;
-  color: rgba($white, 0.62);
-  max-width: 34rem;
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  line-height: 1.6;
+  color: rgba($offwhite, 0.72);
+  max-width: 36rem;
   margin: 0;
 
   @media (max-width: 960px) {
-    max-width: 28rem;
+    max-width: 36ch;
   }
 }
 
@@ -141,6 +157,7 @@
   flex-wrap: wrap;
   gap: 0.75rem;
   align-items: center;
+  margin-top: 0.4rem;
 
   @media (max-width: 960px) {
     justify-content: center;
@@ -152,38 +169,41 @@
   align-items: center;
   gap: 0.5rem;
   font-family: $headerFont;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  color: $obsidian;
-  background: $orange;
+  color: $white;
+  background: linear-gradient(180deg, $orange 0%, $darkorange 100%);
   text-decoration: none;
-  padding: 0.85rem 1.35rem;
+  padding: 0.9rem 1.6rem;
   border-radius: 8px;
-  transition: background 0.18s, transform 0.16s;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.14) inset, 0 12px 26px rgba($orange, 0.3);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
 
   &:hover {
-    background: $lightorange;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    filter: brightness(1.06);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 16px 34px rgba($orange, 0.4);
   }
 }
 
 .ctaSecondary {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
   font-family: $headerFont;
   font-size: 0.92rem;
   font-weight: 700;
-  color: rgba($white, 0.85);
+  color: rgba($offwhite, 0.9);
   text-decoration: none;
-  padding: 0.85rem 1.2rem;
+  padding: 0.9rem 1.3rem;
   border-radius: 8px;
-  border: 1px solid rgba($white, 0.14);
-  transition: border-color 0.18s, background 0.18s;
+  border: 1px solid rgba($offwhite, 0.22);
+  transition: border-color 0.18s, color 0.18s, background 0.18s;
 
   &:hover {
-    border-color: rgba($white, 0.28);
-    background: rgba($white, 0.04);
+    border-color: rgba($orange, 0.6);
+    color: $white;
+    background: rgba($offwhite, 0.05);
   }
 }
 
@@ -191,6 +211,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  margin-top: 0.3rem;
 
   @media (max-width: 960px) {
     justify-content: center;
@@ -206,435 +227,159 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: rgba($white, 0.55);
+  color: rgba($offwhite, 0.6);
   padding: 0.35rem 0.7rem;
   border-radius: 999px;
-  border: 1px solid rgba($white, 0.08);
-  background: rgba($white, 0.03);
+  border: 1px solid rgba($offwhite, 0.1);
+  background: rgba($offwhite, 0.04);
 
   svg {
-    color: rgba($orange, 0.8);
+    color: rgba($orange, 0.9);
+    flex-shrink: 0;
   }
 }
 
+// ── Authentic fire-sprinkler photo card (replaces the blueprint schematic) ────
 .visual {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 300px;
-
-  @media (max-width: 960px) {
-    min-height: 260px;
-  }
+  min-height: 340px;
 }
 
-.schematicWrap {
+.photoCard {
   position: relative;
-  width: min(100%, 420px);
-  aspect-ratio: 360 / 320;
-  border: 1px solid rgba($orange, 0.18);
-  background:
-    linear-gradient(180deg, rgba($white, 0.03) 0%, rgba($white, 0.01) 100%),
-    $obsidian;
-  border-radius: 4px;
+  width: 100%;
+  max-width: 460px;
+  aspect-ratio: 4 / 5;
+  border-radius: $radius-lg;
   overflow: hidden;
+  border: 1px solid rgba($orange, 0.32);
   box-shadow:
-    0 0 0 1px rgba($white, 0.04),
-    0 24px 48px rgba(0, 0, 0, 0.35);
+    0 1px 0 rgba(255, 255, 255, 0.1) inset,
+    0 30px 60px -20px rgba(0, 0, 0, 0.7),
+    0 0 0 6px rgba($orange, 0.07);
 }
 
-.schematicGrid {
+.photo {
+  object-fit: cover;
+  object-position: center;
+}
+
+// Red-to-shadow glaze so the overlays stay readable and it reads as designed
+.photoGlaze {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba($orange, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba($orange, 0.05) 1px, transparent 1px);
-  background-size: 20px 20px;
-  pointer-events: none;
-  opacity: 0.7;
+  background:
+    linear-gradient(180deg, rgba(14, 3, 3, 0) 42%, rgba(14, 3, 3, 0.78) 100%),
+    linear-gradient(300deg, rgba($orange, 0.18) 0%, rgba($orange, 0) 46%);
 }
 
-.schematic {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  display: block;
-  padding: 0.5rem;
-}
-
-.traceMain {
-  stroke: rgba($white, 0.72);
-  stroke-width: 1.75;
-  fill: none;
-  stroke-linecap: square;
-  stroke-linejoin: miter;
-}
-
-.traceDim {
-  stroke: rgba($white, 0.28);
-  stroke-width: 1.1;
-  fill: none;
-  stroke-linecap: square;
-}
-
-.traceAccent {
-  stroke: $orange;
-  stroke-width: 1.5;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.node {
-  fill: rgba($white, 0.45);
-  stroke: none;
-}
-
-.nodeAccent {
-  fill: $orange;
-  stroke: none;
-  filter: drop-shadow(0 0 4px rgba($orange, 0.7));
-}
-
-.schematicCaption {
+.photoBadge {
   position: absolute;
-  bottom: 0.65rem;
-  left: 0.75rem;
-  z-index: 2;
+  top: 0.9rem;
+  left: 0.9rem;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
   font-family: $textFont;
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba($white, 0.4);
-}
-
-.captionDot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: $orange;
-  box-shadow: 0 0 6px rgba($orange, 0.7);
-}
-
-.rBadge {
-  position: absolute;
-  top: 0.65rem;
-  right: 0.65rem;
-  z-index: 3;
-  font-family: $textFont;
-  font-size: 0.58rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  color: $obsidian;
-  background: $orange;
-  padding: 0.28rem 0.55rem;
+  color: $white;
+  background: rgba(14, 3, 3, 0.64);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba($orange, 0.35);
   border-radius: 999px;
-  box-shadow: 0 0 14px rgba($orange, 0.35);
+  padding: 0.4rem 0.85rem;
 }
 
-.layerLegend {
+.photoBadgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $lightorange;
+  box-shadow: 0 0 8px 1px rgba($orange, 0.8);
+  flex-shrink: 0;
+}
+
+.specCard {
   position: absolute;
-  bottom: 2rem;
-  right: 0.65rem;
-  z-index: 3;
+  left: 0.9rem;
+  right: 0.9rem;
+  bottom: 0.9rem;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  font-family: $textFont;
-  font-size: 0.55rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgba($white, 0.55);
-
-  span {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-  }
-
-  i {
-    display: inline-block;
-    width: 14px;
-    height: 4px;
-    border-radius: 1px;
-  }
+  gap: 0.45rem;
+  padding: 0.85rem 1rem;
+  border-radius: $radius-md;
+  background: rgba(14, 3, 3, 0.62);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba($orange, 0.25);
 }
 
-.legBatt {
-  background: $orange;
-  box-shadow: 0 0 6px rgba($orange, 0.5);
-}
+.specRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: $headerFont;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba($offwhite, 0.94);
 
-.legFoam {
-  background: rgba($white, 0.55);
-  background-image: repeating-linear-gradient(
-    90deg,
-    transparent,
-    transparent 2px,
-    rgba($orange, 0.5) 2px,
-    rgba($orange, 0.5) 3px
-  );
-}
-
-.legAir {
-  background: transparent;
-  border: 1px solid rgba($white, 0.45);
-}
-
-// Global keyframe referenced by inline style in Component (module-scoped name
-// is not available to element.style.animation). Use :global so the name is
-// stable across CSS modules.
-:global {
-  @keyframes blueprintDraw {
-    to {
-      stroke-dashoffset: 0;
-    }
+  svg {
+    color: $lightorange;
+    flex-shrink: 0;
   }
 }
 
-/* === UNIQUENESS IDENTITY LAYER — fire-protection-template === */
-/* Auto-generated visual identity so shared archetypes diverge per brand. */
-
-.hero {
-  min-height: 92svh !important;
-  height: auto !important;
-}
-
-.layout {
-  grid-template-columns: minmax(0, 0.89fr) 1fr !important;
-  gap: clamp(3.85rem, 4vw, 5.35rem) !important;
-  padding-top: clamp(8.47rem, 11vh, 10.47rem) !important;
-}
-
-.shard {
-  clip-path: polygon(18% 0%, 100% 0%, 100% 100%, 0% 100%) !important;
-  opacity: 0.48 !important;
-}
-
-.headline {
-  letter-spacing: -0.03em !important;
-  text-transform: uppercase !important;
-  font-weight: 800 !important;
-  transform: skewX(0deg);
-}
-
-.badge {
-  border-radius: 16px !important;
-}
-
-.chip {
-  border-radius: 999px !important;
-}
-
-.ctaPrimary,
-.ctaSecondary {
-  border-radius: 8px !important;
-}
-
-.visual {
-  transform: scale(0.922);
-}
-
-.statCard,
-.console,
-.dialCard,
-.baFrame,
-.tile,
-.jobCard,
-.stripCard,
-.metricBar {
-  box-shadow: 0 24px 60px rgba(0,0,0,0.4) !important;
-}
-
-/* end identity layer */
-
-/* === HERO PATTERN UNIQUENESS — fire-protection-template === */
-.hero {
-  &::before {
-    content: '' !important;
-    position: absolute !important;
-    inset: 0 !important;
-    background-image: radial-gradient(circle at 20% 30%, rgba($orange, 0.06) 0 1px, transparent 2px),
-      radial-gradient(circle at 70% 60%, rgba($white, 0.04) 0 1px, transparent 2px),
-      radial-gradient(circle at 40% 80%, rgba($orange, 0.05) 0 1.5px, transparent 2.5px) !important;
-    background-size: 48px 48px !important;
-    opacity: 0.64 !important;
-    pointer-events: none !important;
-    z-index: 0 !important;
+// ── Responsive ────────────────────────────────────────────────────────────────
+// NOTE: the photo card stays visible on tablet & phone (the old display:none was
+// intentionally removed) so the ownable image is never dropped below the fold.
+@media (max-width: 960px) {
+  .visual {
+    min-height: 0;
+    margin-top: 0.25rem;
   }
-
-  &::after {
-    content: '' !important;
-    position: absolute !important;
-    inset: 0 !important;
-    background-image: radial-gradient(ellipse 50% 40% at 13% 10%, rgba($orange, 0.096), transparent 70%), radial-gradient(ellipse 40% 50% at 96% 68%, rgba($white, 0.03), transparent 65%) !important;
-    pointer-events: none !important;
-    z-index: 0 !important;
+  .photoCard {
+    max-width: 360px;
+    aspect-ratio: 4 / 3;
   }
 }
-/* end hero pattern */
 
-/* === MOBILE HERO FOLD SAFETY (fleet QA) === */
 @media (max-width: 640px) {
-  .hero,
-  .section,
-  .welcome {
+  .hero {
     min-height: 100svh;
-    height: auto !important;
-  }
-  .headline,
-  .title,
-  .heroTitle {
-    font-size: clamp(2.05rem, 9vw, 2.85rem) !important;
-    line-height: 1.05 !important;
-  }
-  .layout,
-  .heroInner,
-  .contentWrap {
-    gap: 1.25rem !important;
-    padding-bottom: 2rem !important;
-  }
-  .ctaRow,
-  .actions,
-  .heroCtas {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .visual,
-  .heroVisual,
-  .meter,
-  .statGrid {
-    min-height: 0 !important;
-  }
-}
-
-/* === TABLET + MOBILE HERO VISUAL DEFER (fleet QA) === */
-/* Hide side dials/meters on tablet & phone so the hero fold stays clean */
-@media (max-width: 960px) {
-  .visual,
-  .heroVisual,
-  .meterWrap,
-  .rightCol,
-  .heroArt {
-    display: none !important;
-  }
-}
-
-/* === MOBILE HERO COPY TIGHTEN (fleet QA) === */
-@media (max-width: 640px) {
-  .sub,
-  .heroSub,
-  .description {
-    font-size: 0.9rem !important;
-    line-height: 1.45 !important;
-    max-width: 34ch !important;
-  }
-  .chips {
-    display: none !important; /* trust chips below fold on phone — CTAs first */
-  }
-}
-
-/* === MOBILE SINGLE COLUMN FORCE (fleet QA) === */
-@media (max-width: 960px) {
-  .layout,
-  .heroLayout,
-  .grid {
-    grid-template-columns: 1fr !important;
-  }
-}
-@media (max-width: 640px) {
-  .hero,
-  .section {
-    height: auto !important;
-    min-height: 100svh !important;
-    overflow: visible !important;
+    height: auto;
   }
   .layout {
-    padding-top: 5rem !important;
-    padding-bottom: 2rem !important;
+    padding-top: 5.5rem;
+    padding-bottom: 2.5rem;
+    gap: 1.5rem;
   }
-}
-
-/* === MOBILE WELCOME STACK (fleet QA) === */
-/* Kill side-by-side hero chrome on phone: stack CTAs, rails, collages, dials */
-@media (max-width: 640px) {
-  .ctaRow,
-  .actions,
-  .heroCtas {
-    flex-direction: column !important;
-    align-items: stretch !important;
-    width: 100% !important;
-    max-width: 22rem !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+  .headline {
+    font-size: clamp(2.05rem, 9vw, 2.85rem);
+    line-height: 1.05;
   }
-
+  .sub {
+    font-size: 0.9rem;
+    line-height: 1.45;
+    max-width: 34ch;
+  }
+  .ctaRow {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 22rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .ctaPrimary,
-  .ctaSecondary,
-  .ctaRow a,
-  .ctaRow button {
-    width: 100% !important;
-    justify-content: center !important;
-    box-sizing: border-box !important;
-  }
-
-  .jobRail,
-  .jobStrip,
-  .shotRail {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 0.65rem !important;
-    width: 100% !important;
-    max-width: 22rem !important;
-    margin: 0 auto !important;
-  }
-
-  .collageGrid,
-  .collage {
-    grid-template-columns: 1fr !important;
-    grid-template-rows: auto !important;
-    min-height: 0 !important;
-    max-width: 22rem !important;
-    width: 100% !important;
-  }
-
-  .tileMain,
-  .tileSide,
-  .tile {
-    grid-column: auto !important;
-    grid-row: auto !important;
-    min-height: 140px !important;
-  }
-
-  .plantDialGrid {
-    grid-template-columns: 1fr 1fr !important;
-    max-width: 100% !important;
-  }
-
-  .scanCard {
-    grid-template-columns: 1fr !important;
-    gap: 0.35rem !important;
-  }
-
-  .scanRight {
-    align-items: flex-start !important;
-  }
-
-  .materials,
-  .matGrid,
-  .swatchGrid {
-    grid-template-columns: 1fr 1fr !important;
-  }
-
-  .statGrid,
-  .statsRow {
-    grid-template-columns: 1fr 1fr !important;
+  .ctaSecondary {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
   }
 }
